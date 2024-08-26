@@ -47,3 +47,38 @@ for i in wznowienia(7,5):
     print("_"*50)
     print(type(i))
     print(f'zwrócono wartośc {i}')
+
+
+print("%"*12)
+
+k = wznowienia(7,5)
+next(k)
+next(k)
+
+print("%"*12)
+
+#przykład 3
+
+def sendgen():
+    x = 0
+    while True:
+        y = yield x
+        if y is None:
+            x=x+1
+        else:
+            x = y*3
+
+
+g = sendgen()
+print("_"*60)
+print(next(g))
+print(next(g))
+print(next(g))
+print(g.send(132))
+print(next(g))
+print(next(g))
+print(next(g))
+print(g.send(88))
+print(next(g))
+print(next(g))
+
