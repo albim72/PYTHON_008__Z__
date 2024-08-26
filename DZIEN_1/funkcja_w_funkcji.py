@@ -39,3 +39,17 @@ def dmuchanie(czego):
     print(f'dmuchanie {czego} na urodziny!')
 
 dmuchanie("baloników")
+
+#przykład 4
+
+liczby = [45,67,890,-345,0,11,478,25,9,-233,-4,4,35,27,-21,3,100,-56]
+
+parzyste = list(filter(lambda x:x%2==0,liczby))
+print(parzyste)
+
+cube = list(map(lambda x:x**3,liczby))
+print(cube)
+
+#list comprehension
+dane = [i**2 for i in range(10_000)]
+print(dane)
