@@ -16,6 +16,11 @@ collection.display_all_books()
 novel.read()
 textbook.read()
 
+print("pokaż obiekty....")
+print(novel)
+print(textbook)
+print(novel(45))
+print(textbook(60))
 
 
 
