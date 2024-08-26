@@ -37,3 +37,41 @@ def info(i):
 
 info("kod: absbdBS")
 info(45348765)
+
+#przykład 3 - dekorator sprawdzający typy argumentów
+
+def sprawdz_typy(typy):
+    def dekorator(funkcja):
+        def wrapper(*args,**kwargs):
+            for (arg,typ) in zip(args,typy):
+                if not isinstance(arg,typ):
+                    raise TypeError(f"Argument {arg} nie jest typu: {typ}")
+            return funkcja(*args,**kwargs)
+        return wrapper
+    return dekorator
+
+@sprawdz_typy((int,int))
+def mnozenie(a,b):
+    return a*b
+
+try:
+    print(mnozenie(6,8))
+    print(mnozenie(4,"osiem"))
+except TypeError as te:
+    print(te)
+
+#przykład 4 -> dekorator złużący do memoizacji wyników
+
+def memoizacja(funkcja):
+    cache = {}
+
+    def wrapper(*args):
+        if args in cache:
+            print(f'Zwracanie wyniku z cache dla argumentów {args}')
+            return cache[args]
+        else:
+            wynik = funkcja(*args)
+            cache[args] = wynik
+            return wynik
+    return wrapper
+
