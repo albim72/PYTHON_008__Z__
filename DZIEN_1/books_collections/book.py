@@ -6,11 +6,18 @@ class Book(ABC):
         self.author = author
         self.year = year
         self.pages = pages
-        
+
+    def __repr__(self):
+        return f"obiekt klasy: {self.__class__.__name__} ({self.title}-{self.author})"
+
+    def __call__(self,price):
+        return f'ilosc stron z dodatkami: {self.pages + 5}, cena:{price}'
+
     @abstractmethod
     def get_info(self):
         pass
-    
+
     @abstractmethod
     def read(self):
         pass
+
