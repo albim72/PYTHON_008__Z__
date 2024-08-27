@@ -14,6 +14,10 @@ class Osoba:
     def wiek(self,nowywiek):
         self._wiek = nowywiek
 
+    @property
+    def bmi(self):
+        return self._waga/(self._wzrost/100)**2
+
 
 
 os = Osoba("Jan","Kowal",30,89,173)
@@ -21,3 +25,4 @@ print(os)
 print(os.wiek)
 os.wiek = 45
 print(os.wiek)
+print(os.bmi)
