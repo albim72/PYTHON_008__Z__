@@ -22,3 +22,21 @@ class RangeValidator:
         else:
             print(f'wartośc {value} jest poza przedziałem (min:{self.min_value},max:{self.max_value})')
             return True
+        
+#przypadek 3 - implementacja z pamięcią podręczną (caching)
+class CacheFunction:
+    def __init__(self,func):
+        self.func = func #funkcja która będzie cachowana...
+        self.cache = {} #inicjalizacja pustego słownika jako cache
+        
+    def __call__(self, *args):
+        #sprawdzamy, czy wynik dla danych argumentów jest już w cache
+        if args in self.cache:
+            print(f"wynik w cache dla argumentów: {args}")
+            return self.cache[args]
+        
+        #jesli nie, obliczamy wynik funkcji i zapisujemy w cache
+        print(f"Wynik obliczeń dla argumentów: {args}")
+        result = self.func(*args)
+        self.cache[args] = result
+        return result
