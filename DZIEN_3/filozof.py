@@ -16,7 +16,7 @@ def brak(self):
 class SednoOdpowiedzi(type):
     def __init__(cls,clsname,bases,attrs):
         if required:
-            if clsname == "Kopernik":
+            if attrs.get('n'):
                 cls.odpowiedz = nowa_odpowiedz
             else:
                 cls.odpowiedz = odpowiedz
@@ -38,10 +38,10 @@ class Kopernik(metaclass=SednoOdpowiedzi):
     #nadpisywanie metody jest nieskuteczne bo metaaklasa narzuca swoje metody!
     # def odpowiedz(self):
     #     return "Nie!Ziemia jest elipsoidą!"
-    pass
+    n = True
 
 class Einstein(metaclass=SednoOdpowiedzi):
-    pass
+    n = True
 
 fil1 = Arystoteles()
 print(f'Filozof {fil1.__class__.__name__} twierdzi: {fil1.odpowiedz()}')
