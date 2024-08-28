@@ -7,13 +7,19 @@ else:
 def odpowiedz(self):
     return "Tak! Ziemia jest płaska!"
 
+def nowa_odpowiedz(self):
+    return "Nie! Ziemia jest elipsoidą!"
+
 def brak(self):
     return "brak odpowiedzi..."
 
 class SednoOdpowiedzi(type):
     def __init__(cls,clsname,bases,attrs):
         if required:
-            cls.odpowiedz = odpowiedz
+            if clsname == "Kopernik":
+                cls.odpowiedz = nowa_odpowiedz
+            else:
+                cls.odpowiedz = odpowiedz
 
         else:
             cls.odpowiedz = brak
@@ -29,6 +35,9 @@ class SwTomasz(metaclass=SednoOdpowiedzi):
     pass
 
 class Kopernik(metaclass=SednoOdpowiedzi):
+    #nadpisywanie metody jest nieskuteczne bo metaaklasa narzuca swoje metody!
+    # def odpowiedz(self):
+    #     return "Nie!Ziemia jest elipsoidą!"
     pass
 
 fil1 = Arystoteles()
