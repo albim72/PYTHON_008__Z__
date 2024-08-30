@@ -2,7 +2,8 @@ import time
 import concurrent.futures
 from funkcja_prime import znajdz_sume_liczb_pierwszych
 
-numbers = [(1,10_000),(3,50_000),(5_000,100_000),(4,900),(8_000,15_0000),(95_000,133_500),(255,67_760)]
+numbers = [(1,10_000),(3,50_000),(5_000,100_000),(4,900),(8_000,15_0000),(95_000,133_500),(255,67_760),
+           (1,10_000),(3,50_000),(5_000,100_000),(4,900),(8_000,15_0000),(95_000,133_500),(255,67_760)]
 
 def synchronicznie():
     starttime = time.time()
@@ -15,8 +16,22 @@ def synchronicznie():
 
     print(f'całkowity czas wyznaczenia sum (synchronicznie): {endtime-starttime} s')
 
+def run_heavy_function(params):
+    return znajdz_sume_liczb_pierwszych(*params)
+
+def asynchronicznie():
+    starttime = time.time()
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+        wynik = executor.map(run_heavy_function,numbers)
+    endtime = time.time()
+    print(list(wynik))
+    print(f'całkowity czas wyznaczenia sum (asynchronicznie): {endtime-starttime} s')
+
+
 def main():
-    synchronicznie()
+    # synchronicznie()
+    print("*"*60)
+    asynchronicznie()
 
 if __name__ == '__main__':
     main()
